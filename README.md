@@ -88,4 +88,98 @@ loop: 10
   }
 })();
 ```
-- 
+- The following will throw an error that a variable has alreay been declared.  And it's right!  You can do this if the 2 lines are in different scope, but not the same scope.
+```javascript
+const student = { name: 'Ken'; }
+var student = { name: 'Jay'; }
+```
+- So this will work...
+```javscript 
+(function () {
+  const student = { name: 'James' };
+  
+  function createStudent(name) {
+    const student = { name: name };
+    return student;
+  }
+  
+  console.log(createStudent('Ken'));
+  console.log(student);
+})();
+
+// output
+{ name: 'Ken' }
+{ name: 'James' }
+```
+- Another example of block level.  Ken is used not James.
+```javascript
+(function () {
+  let student = { name: 'James' };
+  
+  function createStudent(name) {
+    student = { name: name };
+    return student;
+  }
+  
+  console.log(createStudent('Ken'));
+  console.log(student);
+})();
+// output
+{ name: 'Ken' }
+{ name: 'Ken' }
+```
+
+## Immediate Invoked Function Expression
+```javascript
+(function () {
+  // some code here
+})();
+```
+- It's a Immediately Invoked Function Expression, which is a is a design pattern that invokes a self executing anonymous function. There are two parts to this design pattern. First is the JavaScript (function () { Here what is happening is the creating an anonymous function that is scoped to just that function. the second part is the () at the end of the function block. This creates an immediately executing function expression, and the JavaScript interpreter will directly invoke the function. Here is an example:
+
+```javascript
+(function () { 
+    var aName = "Barry";
+})();
+// Variable name is not accessible from the outside scope
+aName // throws "Uncaught ReferenceError: aName is not defined"
+```
+## Template String
+- Any variables you want to wrap in a variable in a string is wrapped in a dollar sign and curly braces.
+```javascript
+const student = { name: 'James', followerCount: 34 };
+
+let tableHtml = `
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Followers</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>${student.name}</td>
+        <td>${student.followerCount}</td>
+      </tr>
+    </tbody>
+  </table>`;
+
+console.log(tableHtml);
+```
+## String Search Method
+```javascript
+let strToSearch = 'a-really-long-hyphenated-string';
+
+console.log(/^a-really/.test(strToSearch)); // test string w/ regular expression
+
+console.log(strToSearch.indexOf('a-really') === 0); // indexOf
+
+console.log(strToSearch.startsWith('lly', 5)); // startsWith
+
+console.log(/hyphenated-string$/.test(strToSearch)); // test string w/ regular expression
+
+console.log(strToSearch.indexOf('hyphenated-string') === strToSearch.length - 'hyphenated-string'.length); // indexOf
+
+console.log(strToSearch.endsWith('hyphenated-string', 21)); // endsWith
+```
