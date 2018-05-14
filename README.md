@@ -58,6 +58,7 @@ loop: 9
 loop: 10
 ```
 - This is fine but then this causes an infintie loop of "loop: 5
+- Why 5 and not 4?  The function changes the global variable "i" to 3, and then when it returns the loop increments it to 4 ("i++"), and then when the function is called again, 1 is added to make 5 ("doLoop(i + 1)"). Then inside the function, the print uses the passed-in argument instead of "i", so it prints 5 each time.  This is a great example of why global variables are often a bad idea.
 
 ```javascript
 (function initLoop() {
@@ -70,4 +71,6 @@ loop: 10
     doLoop( i+1);
   }
 })();
+
+// Infinite Loop: 5
 ```
