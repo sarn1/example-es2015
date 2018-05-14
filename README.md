@@ -4,6 +4,20 @@
 - https://repl.it/repls/VirtuousJointTelephones
 
 # Notes #
+- History
+- Variable Scope
+- Immediate Invoked Function Expression
+- Template String
+- String Search Methods (startsWith, endsWith)
+- Arrow Functions (Lambda Expressions)
+- Rest & Spread Operators
+- Default Paramters
+- Destructuring
+- Misc (Object Property Shorthand, Set, Map - to explore further)
+- Classes
+- Sub-Classes
+- Static Classes
+- Getters & Setters
 
 ## History ##
 - Javascript was developed in 10 days by Brendan Eich at Netscape.
