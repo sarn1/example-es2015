@@ -306,4 +306,76 @@ Equally Important
 - Map?
 
 ## Structure of Class
+- Javascript is a prototype language so it won't have all the OOP features like Java.
+```javascript
+'use strict';
 
+class Student {
+  constructor({ name, age, interestLevel = 5 } = {}) {
+    this.name = name;
+    this.age = age;
+    this.interestLevel = interestLevel;
+    this.grades = new Map();
+  }
+}
+
+let joey = new Student({ name: 'Joey', age: 25 });
+let sarah = new Student({ name: 'Sarah', age: 22 });
+  
+sarah.grades.set('History', 'B');
+sarah.grades.set('Math', 'A');
+  
+console.log(Array.from(sarah.grades));
+
+//console.log(joey);
+//console.log(sarah);
+```
+## Sub-Classes
+- Joisting = A named Javascript function that can be appear at the bottom of the script but can be called before it.  Sub-classes are not joisted, so the class must be declared and defined before the sub-class.
+
+```javascript
+class Person {
+  dance() {
+    const dances = [
+      'waltz',
+      'tango',
+      'mambo',
+      'foxtrot'
+    ];
+    console.log(`${this.name} is doing the ${dances[Math.floor(Math.random() * dances.length)]}!`);
+  }
+  constructor({ name, age, eyeColor = 'brown' } = {}) {
+    this.name = name;
+    this.age = age;
+    this.eyeColor = eyeColor;
+  }
+}
+
+class Student extends Person {              
+ dance(traditional) {             
+  if(traditional) {
+    super.dance();
+    return;           
+  }               
+  const dances = [
+    'lyrical',
+    'tap',
+    'ballet',
+    'jazz'
+  ]; 
+  console.log(`${this.name} is doing the ${dances[Math.floor(Math.random() * dances.length)]}!`);
+ }
+               
+ constructor({ name, age, interestLevel = 5 } = {}) {
+   super({ name, age });      // a "super function" is needed in the subclass to use its parent's variable (instance) since what this does is call the constructor of the parent     
+   this.name = name;
+   this.age = age;
+   this.interestLevel = interestLevel;
+   this.grades = new Map;
+ }
+}
+
+let stevenJ = new Student({ name: 'Steven', age: 22, interestLevel: 3 });
+stevenJ.dance(true);
+console.log(stevenJ.interestLevel);
+```
