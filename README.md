@@ -74,3 +74,18 @@ loop: 10
 
 // Infinite Loop: 5
 ```
+- A correct way to do this with block level scoping is...
+
+```javascript
+(function initLoop() {
+  function doLoop(x) {
+    // i = 3; -- causes error, varible not defined, since i is now at a block-level scoping
+    console.log('loop: ', x);
+  }
+  
+  for (let i = 0; i < 10; i++) {
+    doLoop( i+1);
+  }
+})();
+```
+- 
