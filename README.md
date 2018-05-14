@@ -16,4 +16,58 @@
 
 ## Variable Scope
 - Variable used to only be declared using `var` which creates a variable in the global namespace.  ES6 allows to newer ways to declare variables, `let` and `const`
--
+
+```javascript
+var hello = 'hello';
+
+function sayHi() {
+  var hello = 'hi';
+  console.log(hello);
+}
+
+sayHi();
+console.log(hello)
+
+// output 
+hi
+hello
+```
+- You can see that `var` has function level scoping but ES6 allows block level scoping.  A block can be a function, loop, or if-else statement.
+
+```javascript
+(function initLoop() {
+  function doLoop(x) {
+    console.log('loop: ', x);
+  }
+  
+  for (var i = 0; i < 10; i++) {
+    doLoop( i+1);
+  }
+})();
+
+// output
+loop: 1
+loop: 2
+loop: 3
+loop: 4
+loop: 5
+loop: 6
+loop: 7
+loop: 8
+loop: 9
+loop: 10
+```
+- This is fine but then this causes an infintie loop of "loop: 5
+
+```javascript
+(function initLoop() {
+  function doLoop(x) {
+    i = 3;
+    console.log('loop: ', x);
+  }
+  
+  for (var i = 0; i < 10; i++) {
+    doLoop( i+1);
+  }
+})();
+```
