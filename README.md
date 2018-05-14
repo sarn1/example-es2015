@@ -381,6 +381,7 @@ stevenJ.dance(true);
 console.log(stevenJ.interestLevel);
 ```
 ## Static Class
+```javascript
 class Bird {
   static changeColor(bird, color) {
     bird.color = color; // can't use "this" since its static, without it you would need to do the commented call below.
@@ -405,10 +406,12 @@ blue
 ```javascript
 class Student {
   
+  // getter
   get name() {
     return `${this.firstName} ${this.lastName}`;
   }
   
+  // setter
   set name(input) {
     let name = input.split(' ');
     this.firstName = name[0];
