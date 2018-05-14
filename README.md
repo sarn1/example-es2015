@@ -144,6 +144,7 @@ var student = { name: 'Jay'; }
 // Variable name is not accessible from the outside scope
 aName // throws "Uncaught ReferenceError: aName is not defined"
 ```
+
 ## Template String
 - Any variables you want to wrap in a variable in a string is wrapped in a dollar sign and curly braces.
 ```javascript
@@ -167,6 +168,7 @@ let tableHtml = `
 
 console.log(tableHtml);
 ```
+
 ## String Search Method
 ```javascript
 let strToSearch = 'a-really-long-hyphenated-string';
@@ -183,3 +185,125 @@ console.log(strToSearch.indexOf('hyphenated-string') === strToSearch.length - 'h
 
 console.log(strToSearch.endsWith('hyphenated-string', 21)); // endsWith
 ```
+
+## Arrow Functions (Lambda) To Create Functions 
+- The following will cause an issue because `var getKeys = Alena.getKeys;` is called outside scope.  This is corrected by using a lambda expression.
+```javascript
+// person constructor taking data
+var Person = function (data) {
+  for (var key in data) {
+    this[key] = data[key];  
+  }
+  // method
+  this.getKeys = function () {     // the fix is turn this from an anonymous function to an arrow function. this.getKeys = () => {
+    return Object.keys(this);
+  }
+}
+
+// instantiate new person
+var Alena = new Person({ name: 'Alena', role: 'Teacher' });
+
+console.log('Alena\'s Keys:', Alena.getKeys()); // 'this' refers to 'Alena'
+
+// assign get key method to var outside of person instance -- this causes an issue
+var getKeys = Alena.getKeys;
+
+console.log(getKeys()); // 'this' refers to Alena
+
+```
+- What the lambda expression does is binds the function to the instance to the person no matter where it was called.  Previously it only binds from within the instantiation, but now it is bind when accessing directly like in the case of running `console.log`
+
+## Default Parameters
+- Can be bool, array, functions, or objects.
+```javascript
+function test (name = 'Sarn', num) {
+
+test(undefined, 1);
+```
+## Rest Parameters and Spread Operator
+- Rest parameters allow you to specify an unknown number of parameters.
+- Rest parameters preceeds with 3 dots and must be the last parameter.
+- Think of it as, the rest parameter grabs the parameters and turns the *rest* of the params into an array.
+```javascript
+function func(name, ...params) {
+  console.log(name, params);
+}
+
+func('Andrew', 1,2,3);
+
+// output
+Andrew [1,2,3]
+```
+- A spread operator allows you to specify an unknown number of array properties.
+- A spread operator adds array elements and spreads them out in another array.
+```javascript
+const originalFlavors = ['Chocolate', 'Vanilla', 'Tomato'];
+
+const newFlavors = ['Strawberry', 'Mint Chocolate Chip', 'Superman'];
+
+const inventory = ['Rocky Road', ...originalFlavors, 'Neopolitan', ...newFlavors];
+
+console.log(inventory);
+
+// output
+[ 'Rocky Road',
+  'Chocolate',
+  'Vanilla',
+  'Tomato',
+  'Neopolitan',
+  'Strawberry',
+  'Mint Chocolate Chip',
+  'Superman' ]
+```
+- Spread operator can be use to split an array for output purposes.
+```javascript
+function myFunction (name, iceCreamFlavor) {
+  console.log(`${name} really likes ${iceCreamFlavor} ice cream.`)
+}
+
+let args = ['Gabe', 'Vanilla'];
+
+myFunction(...args);
+
+// output
+Gave really likes Vanilla ice cream.
+```
+
+## Destructuring
+- Destructuring lets you break apart an array or object into variables.
+```javascript
+let widgets = ['widget1', 'widget2', 'widget3', 'widget4', 'widget5'];
+
+let [a, b, c, ...d] = widgets;
+
+console.log(b);
+console.log(d);
+
+// output
+widget2
+['widget4', 'widget5']
+```
+
+```javascript
+let parentObject = {
+  title: 'Super Important',
+  childObject: {
+    title: 'Equally Important'
+  }
+}
+
+let { title, childObject: { title: childTitle } } = parentObject
+
+console.log(childTitle);
+
+// output
+Equally Important
+```
+
+## Misc
+- Object Property Shorthand allows you to access values as variable names.
+- A set is like an array but does not allow duplicate data and has some unique methods for utlity.
+- Map?
+
+## Structure of Class
+
