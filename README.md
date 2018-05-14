@@ -1,6 +1,7 @@
 # example-es2015
 - https://teamtreehouse.com/library/getting-started-with-es2015
 - https://github.com/taniarascia/es6
+- https://repl.it/repls/VirtuousJointTelephones
 
 # Notes #
 
@@ -378,4 +379,53 @@ class Student extends Person {
 let stevenJ = new Student({ name: 'Steven', age: 22, interestLevel: 3 });
 stevenJ.dance(true);
 console.log(stevenJ.interestLevel);
+```
+## Static Class
+class Bird {
+  static changeColor(bird, color) {
+    bird.color = color; // can't use "this" since its static, without it you would need to do the commented call below.
+  }
+  constructor({ color = 'red' } = {}) {
+    this.color = color;
+  }
+}
+
+let redBird = new Bird;               
+console.log(redBird.color);
+Bird.changeColor(redBird, 'blue');
+// Bird.changeColor(redBird, 'blue');
+console.log(redBird.color);               
+               
+// output
+red
+blue
+```
+
+## Getters & Setters
+```javascript
+class Student {
+  
+  get name() {
+    return `${this.firstName} ${this.lastName}`;
+  }
+  
+  set name(input) {
+    let name = input.split(' ');
+    this.firstName = name[0];
+    this.lastName = name[1];
+  }
+  
+  constructor({ firstName, lastName, age, interestLevel = 5 } = {}) {
+    this.firstName = firstName;
+    this.lastName = lastName;           
+    this.age = age;
+    this.interestLevel = interestLevel;
+  }
+}
+
+let stevenJ = new Student({ firstName: 'Steven', lastName: 'Jones', age: 22 });
+  
+console.log(stevenJ.name);  
+stevenJ.name = 'Steven Jennings';  
+console.log(stevenJ.name); 
 ```
